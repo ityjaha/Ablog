@@ -2,11 +2,16 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
+    <Test></Test>
   </div>
 </template>
 
 <script>
+  import Test from './components/test.vue'
 export default {
+   components:{
+    Test,
+   },
   name: 'App'
 }
 </script>
