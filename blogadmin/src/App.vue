@@ -1,28 +1,21 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-    <Test></Test>
+    <Container></Container>
   </div>
 </template>
 
 <script>
-  import Test from './components/test.vue'
+  import Container from './views/Container'
 export default {
    components:{
-    Test,
+    Container,
    },
   name: 'App'
 }
 </script>
-
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+ html,body{
+  margin:0;
+  padding:0;
+ }
 </style>
