@@ -1,26 +1,12 @@
 <template>
-  <el-container style="height: 100%">
-    <el-header>
-      <el-dropdown>
-          <i class="el-icon-setting" style="margin-right: 15px"></i>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>查看</el-dropdown-item>
-            <el-dropdown-item>新增</el-dropdown-item>
-            <el-dropdown-item>删除</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-        <span>王小虎</span>
-    </el-header>
+  <el-container style="height: 100vh">
     <el-container>
       <el-aside width="210px">
-        <el-menu router :default-openeds="['1']" background-color="#545c64" text-color="#fff"  active-text-color="#ffd04b">
+        <el-menu router :default-openeds="['1']" background-color="#545c64" text-color="#fff"  active-text-color="#ffd04b" unique-opened=true>
           <el-submenu index="1">
-            <template slot="title"> <i class="el-icon-location"></i>博客管理</template>
-            <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
+            <template slot="title"> <i class="el-icon-menu"></i>博客管理</template>
+              <el-menu-item index="1-1"><i class="el-icon-edit"></i>创建文章</el-menu-item>
+              <el-menu-item index="1-2"><i class="el-icon-tickets"></i>文章列表</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title"> <i class="el-icon-menu"></i>评论管理</template>
@@ -46,6 +32,22 @@
               <el-menu-item index="1-2">选项2</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
+          <el-submenu index="5">
+            <template slot="title">  <i class="el-icon-setting"></i>个人设置</template>
+            <el-menu-item-group>
+              <template slot="title">分组一</template>
+              <el-menu-item index="1-1">选项1</el-menu-item>
+              <el-menu-item index="1-2">选项2</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+          <el-submenu index="6">
+            <template slot="title">  <i class="el-icon-setting"></i>其他设置</template>
+            <el-menu-item-group>
+              <template slot="title">分组一</template>
+              <el-menu-item index="1-1">选项1</el-menu-item>
+              <el-menu-item index="1-2">选项2</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
         </el-menu>
       </el-aside>
         <el-main>
@@ -59,7 +61,6 @@
           </el-table>
         </el-main>
     </el-container>
-    <el-footer>京公网安备11111111111111号</el-footer>
   </el-container>
 </template>
 <style>
@@ -71,6 +72,7 @@
   
   .el-aside {
     color: #333;
+    margin-top:2px;
   }
 </style>
 
