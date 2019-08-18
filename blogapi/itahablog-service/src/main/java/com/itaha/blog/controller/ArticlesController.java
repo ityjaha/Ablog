@@ -28,7 +28,7 @@ public class ArticlesController {
 		return api.articlesById(id);
 	}
 
-	@GetMapping("/api/articles/insert")
+	@PostMapping("/api/articles/insert")
 	public String articlesInsert(@RequestBody Articles art) {
 		return api.articlesInsert(art);
 	}

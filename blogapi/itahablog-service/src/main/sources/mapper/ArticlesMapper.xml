@@ -14,15 +14,6 @@
 	<sql id="Base_Column_List">
 		id,predate,vprepare,modifydate,modifier
 	</sql>
-	<!-- 文章插入，返回主键 -->
-	<insert id="articlesInsert" parameterType="com.itaha.vo.Articles">
-		<selectKey keyProperty="id" resultType="String" order="AFTER">
-			select LAST_INSERT_ID()
-		</selectKey>
-		insert into
-		articles(id,title,summary,content,remark,labels,url,draftype,categories,predate,vprepare,modifydate,modifier)
-		values(#{id},#{title},#{summary},#{content},#{remark},#{labels},#{url},#{draftype},#{categories},#{predate},#{vprepare},#{modifydate},#{modifier})
-	</insert>
 	<!-- 文章查询 -->
 	<select id="articlesById" parameterType="String" resultMap="ArticlesAndOther">
 		select

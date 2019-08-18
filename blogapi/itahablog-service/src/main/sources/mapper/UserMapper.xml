@@ -14,15 +14,6 @@
 	<sql id="Base_Column_List">
 		id,predate,vprepare,modifydate,modifier
 	</sql>
-	<!-- 人员插入，返回主键 -->
-	<insert id="userInsert" parameterType="com.itaha.vo.User">
-		<selectKey keyProperty="id" resultType="String" order="AFTER">
-			select LAST_INSERT_ID()
-		</selectKey>
-		insert into
-		user(id,nickname,username,password,birthday,otel,mobile,email,address,remark,predate,vprepare,modifydate,modifier)
-		values(#{id},#{nickname},#{username},#{password},#{birthday},#{otel},#{mobile},#{email},#{address},#{remark},#{predate},#{vprepare},#{modifydate},#{modifier})
-	</insert>
 	<!-- 人员查询 -->
 	<select id="userById" parameterType="String" resultMap="UserAndOther">
 		select

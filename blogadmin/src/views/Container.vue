@@ -1,6 +1,21 @@
 <template>
   <el-container style="height:100%">
-    <el-header>Ablog{{user.username}}</el-header>
+    <el-header>
+        <el-row class="demo-avatar demo-basic">
+          <el-col :span="21">
+            <div>Ablog</div>
+          </el-col>
+          <el-col :span="3">
+            <div class="demo-basic--circle">
+              <div class="block head-image">
+                <el-link type="primary" :underline="false">{{user.username}}</el-link>
+                <el-divider direction="vertical"></el-divider>
+                <el-avatar :size="30" fit="fill" :src="circleUrl"></el-avatar>
+              </div>
+            </div>
+          </el-col>  
+        </el-row>
+    </el-header>
     <el-container>
       <el-aside width="210px">
         <el-menu router :default-openeds="['1']" background-color="#545c64" text-color="#fff"  active-text-color="#ffd04b" :unique-opened=true>
@@ -68,12 +83,19 @@
     color: #fff;
     line-height: 60px;
     font-size: 40px;
-    font-family: Times New Roman
+    font-family: Times New Roman;
   }
   .el-aside {
     color: #333;
     margin-top:2px;
   }
+.el-link.el-link--primary{
+    font-size: 20px;
+    color:#eee;
+  }
+.head-image .el-divider{
+  background-color: #666
+}
 </style>
 
 <script>
@@ -82,7 +104,8 @@
       return {
         user:{
 
-        }
+        },
+        circleUrl: "http://localhost:8020/api/image/head.jpg"
       }
     },
     created(){

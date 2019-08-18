@@ -28,7 +28,8 @@ public class ArticlesServiceImpl implements ArticlesService {
 
 	@Override
 	public String articlesInsert(Articles art) {
-		return mapper.articlesInsert(art);
+		mapper.insert(art);
+		return art.getId();
 	}
 
 	@Override

@@ -7,8 +7,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.itaha.vo.User;
 
 public interface UserMapper extends BaseMapper<User> {
-	String userInsert(User u);
-
 	User userById(String id);
 
 	@Select("select * from user where username=#{username} and password=#{password}")
