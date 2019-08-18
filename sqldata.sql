@@ -1,0 +1,149 @@
+/*
+SQLyog Ultimate - MySQL GUI v8.2 
+MySQL - 5.7.17-log : Database - blog
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`blog` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `blog`;
+
+/*Table structure for table `articles` */
+
+DROP TABLE IF EXISTS `articles`;
+
+CREATE TABLE `articles` (
+  `id` varchar(64) NOT NULL,
+  `title` varchar(64) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `content` text,
+  `predate` datetime DEFAULT NULL,
+  `vprepare` varchar(64) DEFAULT NULL,
+  `modifydate` datetime DEFAULT NULL,
+  `modifier` varchar(64) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `labels` varchar(255) DEFAULT NULL,
+  `draftype` varchar(32) DEFAULT NULL,
+  `url` varchar(64) DEFAULT NULL,
+  `categories` varchar(255) DEFAULT NULL,
+  `userid` varchar(64) DEFAULT NULL,
+  `browsedid` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `articles` */
+
+insert  into `articles`(`id`,`title`,`summary`,`content`,`predate`,`vprepare`,`modifydate`,`modifier`,`remark`,`labels`,`draftype`,`url`,`categories`,`userid`,`browsedid`) values ('115456487174','第一篇测试标题','第一个测试摘要','第一篇文章内容测试\r\n因为树莓派还没到手，所以想要本机模拟先学习学习。\r\n折腾了两天，本地环境搭了三遍。目前用的最舒服的还是在Debian的基础上，用python3自己构建环境。','2019-08-17 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'a3ae20b4821bf5af243401dc31b8e46d','8918340918349'),('1154564ee287174','第er篇测试标题','第er个测试摘要','第er篇文章内容测试','2019-08-17 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('11545wq64ee287174','第san篇测试标题','第san个测试摘要','第sanhaidhaiu挥洒大会啊啊篇文章内容测试','2019-08-17 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+
+/*Table structure for table `browsed` */
+
+DROP TABLE IF EXISTS `browsed`;
+
+CREATE TABLE `browsed` (
+  `id` varchar(64) NOT NULL,
+  `predate` datetime DEFAULT NULL,
+  `vprepare` varchar(64) DEFAULT NULL,
+  `modifydate` datetime DEFAULT NULL,
+  `modifier` varchar(64) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `userid` varchar(64) DEFAULT NULL,
+  `articlesid` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `browsed` */
+
+insert  into `browsed`(`id`,`predate`,`vprepare`,`modifydate`,`modifier`,`remark`,`userid`,`articlesid`) values ('8918340918349','2019-08-17 00:00:00','123','2019-08-17 00:00:00','adfs','sdfahjdiofh','a3ae20b4821bf5af243401dc31b8e46d','115456487174');
+
+/*Table structure for table `categories` */
+
+DROP TABLE IF EXISTS `categories`;
+
+CREATE TABLE `categories` (
+  `id` varchar(64) NOT NULL,
+  `name` varchar(32) DEFAULT NULL,
+  `predate` datetime DEFAULT NULL,
+  `vprepare` varchar(64) DEFAULT NULL,
+  `modifydate` datetime DEFAULT NULL,
+  `modifier` varchar(64) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `categories` */
+
+/*Table structure for table `comments` */
+
+DROP TABLE IF EXISTS `comments`;
+
+CREATE TABLE `comments` (
+  `id` varchar(64) NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `cmtype` varchar(32) DEFAULT NULL,
+  `predate` datetime DEFAULT NULL,
+  `vprepare` varchar(64) DEFAULT NULL,
+  `modifydate` datetime DEFAULT NULL,
+  `modifier` varchar(64) DEFAULT NULL,
+  `userid` varchar(64) DEFAULT NULL,
+  `articlesid` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `comments` */
+
+insert  into `comments`(`id`,`content`,`cmtype`,`predate`,`vprepare`,`modifydate`,`modifier`,`userid`,`articlesid`) values ('999999999999','评论一下这个文章','1',NULL,NULL,NULL,NULL,'a3ae20b4821bf5af243401dc31b8e46d',NULL);
+
+/*Table structure for table `labels` */
+
+DROP TABLE IF EXISTS `labels`;
+
+CREATE TABLE `labels` (
+  `id` varchar(64) NOT NULL,
+  `name` varchar(32) DEFAULT NULL,
+  `predate` datetime DEFAULT NULL,
+  `vprepare` varchar(64) DEFAULT NULL,
+  `modifydate` datetime DEFAULT NULL,
+  `modifier` varchar(64) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `labels` */
+
+/*Table structure for table `user` */
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `id` varchar(64) DEFAULT NULL,
+  `nickname` varchar(64) DEFAULT NULL,
+  `username` varchar(32) DEFAULT NULL,
+  `password` varchar(64) DEFAULT NULL,
+  `birthday` datetime DEFAULT NULL,
+  `otel` varchar(32) DEFAULT NULL,
+  `mobile` varchar(32) DEFAULT NULL,
+  `email` varchar(32) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `predate` datetime DEFAULT NULL,
+  `vprepare` varchar(64) DEFAULT NULL,
+  `modifydate` datetime DEFAULT NULL,
+  `modifier` varchar(64) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `user` */
+
+insert  into `user`(`id`,`nickname`,`username`,`password`,`birthday`,`otel`,`mobile`,`email`,`address`,`remark`,`predate`,`vprepare`,`modifydate`,`modifier`) values ('a3ae20b4821bf5af243401dc31b8e46d','itaha','yj','itaha',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('559587dac3dcf4d61936b16c690ba23a','itaha123','yj','123',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

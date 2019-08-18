@@ -1,5 +1,3 @@
-/*#
- #*/
 package com.itaha.vo;
 
 import java.util.Date;
@@ -10,19 +8,15 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
- * 评论表
+ * 浏览记录表
  * 
  * @author itaha
  *
  */
-@TableName(value = "comments")
-public class Comments {
+@TableName(value = "browsed")
+public class Browsed {
 	@TableId(type = IdType.UUID)
 	private String id;
-	@TableField
-	private String content; // 评论内容
-	@TableField
-	private String cmtype; // 评论级次
 	@TableField
 	private Date predate;
 	@TableField
@@ -31,9 +25,10 @@ public class Comments {
 	private Date modifydate;
 	@TableField
 	private String modifier;
-
-	private User user; // 谁的评论
-	private Articles articles; // 评论了哪篇文章
+	@TableField
+	private String remark;
+	private User user; // 谁浏览过
+	private Articles articles;// 浏览的是哪篇文章
 
 	public String getId() {
 		return id;
@@ -41,22 +36,6 @@ public class Comments {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getCmtype() {
-		return cmtype;
-	}
-
-	public void setCmtype(String cmtype) {
-		this.cmtype = cmtype;
 	}
 
 	public Date getPredate() {
@@ -89,6 +68,14 @@ public class Comments {
 
 	public void setModifier(String modifier) {
 		this.modifier = modifier;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public User getUser() {

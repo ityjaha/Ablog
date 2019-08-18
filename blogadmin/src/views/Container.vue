@@ -1,12 +1,18 @@
 <template>
-  <el-container style="height: 100vh">
+  <el-container style="height:100%">
+    <el-header>Ablog{{user.username}}</el-header>
     <el-container>
       <el-aside width="210px">
-        <el-menu router :default-openeds="['1']" background-color="#545c64" text-color="#fff"  active-text-color="#ffd04b" unique-opened=true>
+        <el-menu router :default-openeds="['1']" background-color="#545c64" text-color="#fff"  active-text-color="#ffd04b" :unique-opened=true>
           <el-submenu index="1">
             <template slot="title"> <i class="el-icon-menu"></i>博客管理</template>
-              <el-menu-item index="1-1"><i class="el-icon-edit"></i>创建文章</el-menu-item>
-              <el-menu-item index="1-2"><i class="el-icon-tickets"></i>文章列表</el-menu-item>
+              <el-menu-item index="articlesEdit"><i class="el-icon-edit"></i>创建文章</el-menu-item>
+              <el-menu-item index="articlesList"><i class="el-icon-tickets"></i>文章列表</el-menu-item>
+          </el-submenu>
+          <el-submenu index="11">
+            <template slot="title"> <i class="el-icon-menu"></i>用户管理</template>
+              <el-menu-item index="1-1"><i class="el-icon-edit"></i>创建用户</el-menu-item>
+              <el-menu-item index="articlesList"><i class="el-icon-tickets"></i>用户列表</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title"> <i class="el-icon-menu"></i>评论管理</template>
@@ -50,26 +56,20 @@
           </el-submenu>
         </el-menu>
       </el-aside>
-        <el-main>
-          <el-table :data="tableData">
-            <el-table-column prop="date" label="日期" width="140">
-            </el-table-column>
-            <el-table-column prop="name" label="姓名" width="120">
-            </el-table-column>
-            <el-table-column prop="address" label="地址">
-            </el-table-column>
-          </el-table>
-        </el-main>
+      <el-main>
+        <router-view/>
+      </el-main>
     </el-container>
   </el-container>
 </template>
 <style>
   .el-header {
-    /*background-color: #B3C0D1;*/
-    color: #333;
+    background-color:#545c64;
+    color: #fff;
     line-height: 60px;
+    font-size: 40px;
+    font-family: Times New Roman
   }
-  
   .el-aside {
     color: #333;
     margin-top:2px;
@@ -79,14 +79,14 @@
 <script>
   export default {
     data() {
-      const item = {
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      };
       return {
-        tableData: Array(6).fill(item)
+        user:{
+
+        }
       }
+    },
+    created(){
+      this.user = this.$storeLocal.get('user');
     }
   };
 </script>

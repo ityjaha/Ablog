@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itaha.blog.mapper.ArticlesMapper">
+
+	<!-- 通用查询映射结果 -->
+	<!-- <resultMap id="BaseResultMap" type="com.elens.data.rbces.mybatis.entity.ElensReport"> 
+		<id column="id" property="id" /> <result column="report_name" property="reportName" 
+		/> <result column="report_title" property="reportTitle" /> <result column="report_content" 
+		property="reportContent" /> <result column="update_time" property="updateTime" 
+		/> <result column="photo" property="photo" /> <result column="per_id" property="perId" 
+		/> <result column="create_time" property="createTime" /> </resultMap> -->
+
+	<!-- 通用查询结果列 -->
+	<sql id="Base_Column_List">
+		id,predate,vprepare,modifydate,modifier
+	</sql>
+	<!-- 文章插入，返回主键 -->
+	<insert id="articlesInsert" parameterType="com.itaha.vo.Articles">
+		<selectKey keyProperty="id" resultType="String" order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
+		insert into
+		articles(id,title,summary,content,remark,labels,url,draftype,categories,predate,vprepare,modifydate,modifier)
+		values(#{id},#{title},#{summary},#{content},#{remark},#{labels},#{url},#{draftype},#{categories},#{predate},#{vprepare},#{modifydate},#{modifier})
+	</insert>
+	<!-- 文章查询 -->
+	<select id="articlesById" parameterType="String" resultMap="ArticlesAndOther">
+		select
+		a.id,a.title,a.summary,a.content,a.remark,a.labels,a.url,a.draftype,a.categories,a.predate,a.vprepare,a.modifydate,a.modifier,
+		u.id as uid,u.username,u.nickname,b.id as bid,b.predate as bpredate
+		from articles a
+		left join user u on a.userid=u.id
+		left join browsed b on
+		a.browsedid=b.id
+		where a.id=#{id}
+	</select>
+	<!-- 文章查询 -->
+	<select id="articlesList" resultMap="ArticlesAndOther">
+		select
+		a.id,a.title,a.summary,a.content,a.remark,a.labels,a.url,a.draftype,a.categories,a.predate,a.vprepare,a.modifydate,a.modifier,
+		u.id as uid,u.username,u.nickname,b.id as bid,b.predate as bpredate
+		from articles a
+		left join user u on a.userid=u.id
+		left join browsed b on
+		a.browsedid=b.id
+	</select>
+
+	<!-- 自定义返回结果集 -->
+	<resultMap type="com.itaha.vo.Articles" id="ArticlesAndOther">
+		<id property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="summary" column="summary" />
+		<result property="content" column="content" />
+		<result property="remark" column="remark" />
+		<result property="labels" column="labels" />
+		<result property="url" column="url" />
+		<result property="draftype" column="draftype" />
+		<result property="categories" column="categories" />
+		<result property="predate" column="predate" />
+		<result property="vprepare" column="vprepare" />
+		<result property="modifydate" column="modifydate" />
+		<result property="modifier" column="modifier" />
+		<!-- 注意点 集合的属性值 ：必须是实体类中 集合的成员变量名 -->
+		<collection property="user" ofType="com.itaha.vo.User">
+			<id property="id" column="uid" />
+			<result property="username" column="username" />
+			<result property="nickname" column="nickname" />
+		</collection>
+		<collection property="browsedList" ofType="com.itaha.vo.Browsed">
+			<id property="id" column="bid" />
+			<result property="predate" column="bpredate" />
+		</collection>
+	</resultMap>
+</mapper>

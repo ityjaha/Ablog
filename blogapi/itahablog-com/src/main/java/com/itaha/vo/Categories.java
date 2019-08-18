@@ -1,5 +1,3 @@
-/*#
- #*/
 package com.itaha.vo;
 
 import java.util.Date;
@@ -10,19 +8,17 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
- * 评论表
+ * 文章分类表
  * 
  * @author itaha
  *
  */
-@TableName(value = "comments")
-public class Comments {
+@TableName(value = "categories")
+public class Categories {
 	@TableId(type = IdType.UUID)
 	private String id;
 	@TableField
-	private String content; // 评论内容
-	@TableField
-	private String cmtype; // 评论级次
+	private String name;
 	@TableField
 	private Date predate;
 	@TableField
@@ -31,9 +27,8 @@ public class Comments {
 	private Date modifydate;
 	@TableField
 	private String modifier;
-
-	private User user; // 谁的评论
-	private Articles articles; // 评论了哪篇文章
+	@TableField
+	private String remark;
 
 	public String getId() {
 		return id;
@@ -43,20 +38,12 @@ public class Comments {
 		this.id = id;
 	}
 
-	public String getContent() {
-		return content;
+	public String getName() {
+		return name;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getCmtype() {
-		return cmtype;
-	}
-
-	public void setCmtype(String cmtype) {
-		this.cmtype = cmtype;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Date getPredate() {
@@ -91,20 +78,12 @@ public class Comments {
 		this.modifier = modifier;
 	}
 
-	public User getUser() {
-		return user;
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Articles getArticles() {
-		return articles;
-	}
-
-	public void setArticles(Articles articles) {
-		this.articles = articles;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }

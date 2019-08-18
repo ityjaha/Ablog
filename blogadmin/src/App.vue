@@ -1,22 +1,21 @@
 <template>
   <div id="app">
-    <Bar></Bar>
-    <Container></Container>
+    <!-- <Container></Container> -->
+    <router-view/>
   </div>
 </template>
 
 <script>
-  import Container from './views/Container'
-  import Bar from './views/Bar'
 export default {
    components:{
-    Container,Bar,
+    
    },
   name: 'App'
 }
 </script>
 <style>
  html,body{
+  /*height:100%;*/
   border:none;
   margin:0;
   padding:0;

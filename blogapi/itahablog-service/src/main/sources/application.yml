@@ -1,0 +1,25 @@
+server:
+   port: 8020
+spring:
+   application:
+      name: itahablogservice
+   datasource:
+      driver-class-name: org.gjt.mm.mysql.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://localhost:3306/blog
+      username: root
+      password: password
+      dbcp2:
+         initial-size: 5 # 初始化连接数
+         max-total: 5 # 最大连接数
+         max-wait-millis: 200 # 等待连接获取的最大超时时间
+         min-idle: 5 # 数据库连接池的最小维持连接
+mybatis-plus:
+   mapper-locations: classpath:/mapper/*.xml
+   type-aliases-package: com.itaha.blog.vo
+   type-aliases-super-type: java.lang.Object
+   #type-handlers-package: com.itaha.cloud.handler 处理各种字段转换的handler
+   configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+upload:
+  image-url: E:\\MY_Upload

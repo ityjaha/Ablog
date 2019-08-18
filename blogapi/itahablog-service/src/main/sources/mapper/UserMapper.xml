@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itaha.blog.mapper.UserMapper">
+
+	<!-- 通用查询映射结果 -->
+	<!-- <resultMap id="BaseResultMap" type="com.elens.data.rbces.mybatis.entity.ElensReport"> 
+		<id column="id" property="id" /> <result column="report_name" property="reportName" 
+		/> <result column="report_title" property="reportTitle" /> <result column="report_content" 
+		property="reportContent" /> <result column="update_time" property="updateTime" 
+		/> <result column="photo" property="photo" /> <result column="per_id" property="perId" 
+		/> <result column="create_time" property="createTime" /> </resultMap> -->
+
+	<!-- 通用查询结果列 -->
+	<sql id="Base_Column_List">
+		id,predate,vprepare,modifydate,modifier
+	</sql>
+	<!-- 人员插入，返回主键 -->
+	<insert id="userInsert" parameterType="com.itaha.vo.User">
+		<selectKey keyProperty="id" resultType="String" order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
+		insert into
+		user(id,nickname,username,password,birthday,otel,mobile,email,address,remark,predate,vprepare,modifydate,modifier)
+		values(#{id},#{nickname},#{username},#{password},#{birthday},#{otel},#{mobile},#{email},#{address},#{remark},#{predate},#{vprepare},#{modifydate},#{modifier})
+	</insert>
+	<!-- 人员查询 -->
+	<select id="userById" parameterType="String" resultMap="UserAndOther">
+		select
+		u.id,u.nickname,u.username,u.birthday,u.otel,u.mobile,u.email,u.address,u.remark,u.predate,u.vprepare,u.modifydate,u.modifier,a.id
+		as aid,a.title,a.summary,a.content as acontent,a.predate as
+		apredate,a.modifydate as amodifydate,c.id as cid,c.content as
+		ccontent,
+		b.id as bid,b.predate as bpredate
+		from user u
+		left join
+		articles a on u.id=a.userid
+		left join comments c on u.id=c.userid
+		left
+		join browsed b on u.id=b.userid
+		where u.id=#{id}
+	</select>
+
+	<!-- 自定义返回结果集 -->
+	<resultMap type="com.itaha.vo.User" id="UserAndOther">
+		<id property="id" column="id" />
+		<result property="nickname" column="nickname" />
+		<result property="username" column="username" />
+		<!-- <result property="password" column="password" /> -->
+		<result property="birthday" column="birthday" />
+		<result property="otel" column="otel" />
+		<result property="mobile" column="mobile" />
+		<result property="email" column="email" />
+		<result property="address" column="address" />
+		<result property="remark" column="remark" />
+		<result property="predate" column="predate" />
+		<result property="vprepare" column="vprepare" />
+		<result property="modifydate" column="modifydate" />
+		<result property="modifier" column="modifier" />
+		<!-- 注意点 集合的属性值 ：必须是实体类中 集合的成员变量名 -->
+		<collection property="commentsList" ofType="com.itaha.vo.Comments">
+			<id property="id" column="cid" />
+			<result property="content" column="ccontent" />
+		</collection>
+		<collection property="articlesList" ofType="com.itaha.vo.Categories">
+			<id property="id" column="aid" />
+			<result property="title" column="title" />
+			<result property="summary" column="summary" />
+			<result property="content" column="acontent" />
+			<result property="predate" column="apredate" />
+			<result property="modifydate" column="amodifydate" />
+		</collection>
+
+		<collection property="browsedList" ofType="com.itaha.vo.Browsed">
+			<id property="id" column="bid" />
+			<result property="predate" column="bpredate" />
+		</collection>
+	</resultMap>
+</mapper>
